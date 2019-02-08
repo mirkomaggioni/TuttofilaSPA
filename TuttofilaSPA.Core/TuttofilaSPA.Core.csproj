@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextFactory.cs" />
     <Compile Include="Migrations\201902082114110_CreazioneTabelle.cs" />
     <Compile Include="Migrations\201902082114110_CreazioneTabelle.Designer.cs">
       <DependentUpon>201902082114110_CreazioneTabelle.cs</DependentUpon>
@@ -60,6 +61,7 @@
     <Compile Include="Models\Sala.cs" />
     <Compile Include="Models\Servizio.cs" />
     <Compile Include="Models\TuttofilaContext.cs" />
+    <Compile Include="ModuloCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

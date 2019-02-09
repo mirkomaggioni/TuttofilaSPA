@@ -1,0 +1,25 @@
+﻿<div class="col-lg-2">
+  <ul class="nav nav-pills nav-stacked">
+    <li role="presentation" ng-class="{active: $state.includes('home.sale') || $state.includes('home.sala')}">
+      <a ui-sref="home.sale">
+        <i class="fa fa-users"></i>
+        Sale
+      </a>
+    </li>
+    <li role="presentation" ng-class="{active: $state.includes('home.servizi') || $state.includes('home.servizio')}">
+      <a ui-sref="home.servizi">
+        <i class="fa fa-ticket"></i>
+        Servizi
+      </a>
+    </li>
+    <li role="presentation" ng-class="{active: $state.includes('home.sportello') || $state.includes('home.sportello')}">
+      <a ui-sref="home.sportello">
+        <i class="fa fa-ticket"></i>
+        Sportelli
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="col-lg-10">
+  <div ui-view></div>
+</div>

@@ -1,0 +1,16 @@
+{
+  "name": "asp.net",
+  "version": "1.0.0",
+  "authors": [
+    "SinTel"
+  ],
+  "description": "Base SPA",
+  "main": "index.html",
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "angular": "1.7.7",
+    "angular-filter": "0.5.17",
+    "angular-ui-router": "1.0.20",
+    "components-font-awesome": "4.7.0"
+  }
+}

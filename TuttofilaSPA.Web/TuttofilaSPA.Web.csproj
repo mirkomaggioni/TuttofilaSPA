@@ -193,6 +193,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bower.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

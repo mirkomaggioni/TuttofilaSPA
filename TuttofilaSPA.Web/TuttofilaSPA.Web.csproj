@@ -188,6 +188,14 @@
     <Content Include="app\main\header.html" />
     <Content Include="app\main\main.html" />
     <Content Include="app\main\mainModule.js" />
+    <Content Include="app\main\sale\sala.html" />
+    <Content Include="app\main\sale\sale.html" />
+    <Content Include="app\main\sale\saleModule.js" />
+    <Content Include="app\main\servizi\servizi.html" />
+    <Content Include="app\main\servizi\serviziModule.js" />
+    <Content Include="app\main\servizi\servizio.html" />
+    <Content Include="app\main\sportelli\sportelli.html" />
+    <Content Include="app\main\sportelli\sportelliModule.js" />
     <Content Include="Index.html" />
     <Content Include="Web.config" />
   </ItemGroup>

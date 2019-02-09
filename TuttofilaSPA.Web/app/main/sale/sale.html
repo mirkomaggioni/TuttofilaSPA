@@ -1,0 +1,25 @@
+﻿
+<div class="col-lg-10">
+  <button type="button" class="btn btn-primary" ng-click="new()">New</button>
+</div>
+
+<div class="col-lg-2">
+  <input type="text" class="form-control" placeholder="Search" ng-model="query" required>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Nome
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="sala in Sale | filter: query" ng-click="detail(sala.Id)">
+      <td>
+        {{sala.Nome}}
+      </td>
+    </tr>
+  </tbody>
+</table>

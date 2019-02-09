@@ -21,14 +21,14 @@ namespace TuttofilaSPA.Web.Controllers.OData
 
 		// GET: odata/Servizi
 		[EnableQuery]
-		public IQueryable<Servizio> GetServizi()
+		public IQueryable<Servizio> Get()
 		{
 			return _db.Servizi;
 		}
 
 		// GET: odata/Servizi(5)
 		[EnableQuery]
-		public SingleResult<Servizio> GetSale(Guid key)
+		public SingleResult<Servizio> Get(Guid key)
 		{
 			return SingleResult.Create(_db.Servizi.Where(b => b.Id == key));
 		}

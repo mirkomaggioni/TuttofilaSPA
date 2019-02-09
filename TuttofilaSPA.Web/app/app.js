@@ -2,7 +2,7 @@
   'use-strict';
   angular.module('app', ['ui.router', 'angular.filter', 'mainModule'])
     .config(function ($urlRouterProvider, $locationProvider) {
-      $urlRouterProvider.otherwise('/home');
+      $urlRouterProvider.otherwise('/home/sportelli');
       $locationProvider.hashPrefix('');
     });
 })(window, window.angular);

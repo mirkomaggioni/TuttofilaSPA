@@ -1,10 +1,14 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+﻿<form name="form">
+  <div class="form-group">
+    <label for="name">Sala</label>
+    <select class="form-control" id="sala" name="sala" ng-options="sala.Id as sala.Nome for sala in Sale" ng-model="Servizio.SalaId"></select>
+  </div>
+  <div class="form-group">
+    <label for="name">Nome</label>
+    <input type="text" class="form-control" id="servizio" name="servizio" placeholder="Servizio" ng-model="Servizio.Nome" required>
+  </div>
 
-</body>
-</html>
+  <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="!form.$valid">Salva</button>
+  <button type="button" class="btn btn-danger" ng-disabled="!form.$valid || Servizio.Id == undefined" ng-click="delete()">Elimina</button>
+  <button type="button" class="btn btn-default" ng-click="close()">Chiudi</button>
+</form>

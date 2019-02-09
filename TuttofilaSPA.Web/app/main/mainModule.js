@@ -1,6 +1,6 @@
 ﻿(function (window, angular) {
   'use-strict';
-  angular.module('mainModule', ['ui.router', 'saleModule'])
+  angular.module('mainModule', ['ui.router', 'saleModule', 'serviziModule'])
     .config(function ($stateProvider) {
       var mainState = {
         name: 'home',

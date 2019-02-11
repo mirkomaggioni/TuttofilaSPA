@@ -2,17 +2,19 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using TuttofilaSPA.Core.BusinessObjects;
 using TuttofilaSPA.Core.Models;
 
 namespace TuttofilaSPA.Core.Services
 {
 	public class SportelloService
 	{
-		private readonly ConcurrentDictionary<string, List<Servizio>> ServiziChiamati = new ConcurrentDictionary<string, List<Servizio>>();
+		private readonly ConcurrentDictionary<string, List<ChiamataSportello>> ServiziChiamati = new ConcurrentDictionary<string, List<ChiamataSportello>>();
 		private readonly ConnectionFactory ConnectionFactory;
 		private readonly List<AmqpTcpEndpoint> AmqpTcpEndpoints = new List<AmqpTcpEndpoint>()
 			{
@@ -41,7 +43,7 @@ namespace TuttofilaSPA.Core.Services
 			using (var channel = connection.CreateModel())
 			{
 				channel.ExchangeDeclare(exchange, "direct", false, false, null);
-				channel.BasicPublish(exchange, routingKey, true, null, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(servizio)));
+				channel.BasicPublish(exchange, routingKey, true, null, Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new ChiamataSportello(servizio))));
 			}
 		}
 
@@ -59,10 +61,10 @@ namespace TuttofilaSPA.Core.Services
 					try
 					{
 						channel.BasicAck(result.DeliveryTag, false);
-						var servizio = JsonConvert.DeserializeObject<Servizio>(Encoding.UTF8.GetString(result.Body));
-						var serviziChiamatiSala = ServiziChiamati.GetOrAdd(servizio.SalaId.ToString(), new List<Servizio>());
-						serviziChiamatiSala.Add(servizio);
-						ServiziChiamati.AddOrUpdate(servizio.SalaId.ToString(), serviziChiamatiSala, (_, __) => serviziChiamatiSala);
+						var chiamataSportello = JsonConvert.DeserializeObject<ChiamataSportello>(Encoding.UTF8.GetString(result.Body));
+						var serviziChiamatiSala = ServiziChiamati.GetOrAdd(chiamataSportello.SalaId.ToString(), new List<ChiamataSportello>());
+						serviziChiamatiSala.Add(chiamataSportello);
+						ServiziChiamati.AddOrUpdate(chiamataSportello.SalaId.ToString(), serviziChiamatiSala, (_, __) => serviziChiamatiSala);
 					}
 					catch (Exception)
 					{
@@ -74,11 +76,11 @@ namespace TuttofilaSPA.Core.Services
 			}
 		}
 
-		public List<Servizio> RestituisciServiziChiamati(Guid salaId)
+		public List<ChiamataSportello> RestituisciServiziChiamati(Guid salaId)
 		{
-			var servizi = ServiziChiamati.GetOrAdd(salaId.ToString(), new List<Servizio>());
-			ServiziChiamati.AddOrUpdate(salaId.ToString(), new List<Servizio>(), (_, __) => new List<Servizio>());
-			return servizi;
+			var chiamateSportello = ServiziChiamati.GetOrAdd(salaId.ToString(), new List<ChiamataSportello>());
+			ServiziChiamati.AddOrUpdate(salaId.ToString(), new List<ChiamataSportello>(), (_, __) => new List<ChiamataSportello>());
+			return chiamateSportello.OrderByDescending(cs => cs.Data).ToList();
 		}
 	}
 }

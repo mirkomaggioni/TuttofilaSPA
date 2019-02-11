@@ -1,10 +1,27 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+﻿<form name="form" role="form">
+  <div class="row">
+    <select class="form-control col-md-6" id="sala" name="sala" ng-options="sala.Id as sala.Nome for sala in Sale" ng-model="salaId"></select>
+    <select class="form-control col-md-6" id="servizio" name="servizio" ng-options="servizio as servizio.Nome for servizio in Servizi | filter: { SalaId: salaId }" ng-model="servizio"></select>
+  </div>
+  <div class="row">
+    <button type="button" class="btn btn-primary" ng-click="chiama()" ng-disabled="!form.$valid">Chiama</button>
+  </div>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            Nome
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="servizioChiamato in ServiziChiamati">
+          <td>
+            {{servizioChiamato.Nome}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>

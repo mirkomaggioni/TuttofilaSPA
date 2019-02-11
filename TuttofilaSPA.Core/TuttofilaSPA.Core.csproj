@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\ChiamataSportello.cs" />
     <Compile Include="ContextFactory.cs" />
     <Compile Include="Migrations\201902082114110_CreazioneTabelle.cs" />
     <Compile Include="Migrations\201902082114110_CreazioneTabelle.Designer.cs">

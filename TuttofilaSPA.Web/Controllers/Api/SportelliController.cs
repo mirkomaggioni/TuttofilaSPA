@@ -20,7 +20,7 @@ namespace TuttofilaSPA.Web.Controllers.Api
 		[HttpPost]
 		public IHttpActionResult ChiamaServizio(Servizio servizio)
 		{
-			_sportelloService.ChiamaServizio(servizio);
+			_sportelloService.Pubblica(servizio);
 			return Ok();
 		}
 	}

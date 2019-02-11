@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using Autofac;
 using RabbitMQ.Client;
 using TuttofilaSPA.Core.Services;
@@ -9,7 +10,10 @@ namespace TuttofilaSPA.Core
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<SportelloService>().SingleInstance();
+			builder.RegisterAssemblyTypes(typeof(SportelloService).Assembly)
+				.Where(t => t.Namespace == typeof(SportelloService).Namespace)
+				.SingleInstance();
+
 			builder.RegisterType<ContextFactory>().SingleInstance();
 
 			var connectionFactory = new ConnectionFactory

@@ -73,5 +73,12 @@ namespace TuttofilaSPA.Core.Services
 				channel.BasicConsume(queue, false, consumer);
 			}
 		}
+
+		public List<Servizio> RestituisciServiziChiamati(Guid salaId)
+		{
+			var servizi = ServiziChiamati.GetOrAdd(salaId.ToString(), new List<Servizio>());
+			ServiziChiamati.AddOrUpdate(salaId.ToString(), new List<Servizio>(), (_, __) => new List<Servizio>());
+			return servizi;
+		}
 	}
 }

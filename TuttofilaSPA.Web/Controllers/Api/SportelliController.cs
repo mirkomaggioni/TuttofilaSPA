@@ -23,5 +23,11 @@ namespace TuttofilaSPA.Web.Controllers.Api
 			_sportelloService.Pubblica(servizio);
 			return Ok();
 		}
+
+		[HttpGet]
+		public IHttpActionResult RestituisciServiziChiamati(Guid salaId)
+		{
+			return Ok(_sportelloService.RestituisciServiziChiamati(salaId));
+		}
 	}
 }

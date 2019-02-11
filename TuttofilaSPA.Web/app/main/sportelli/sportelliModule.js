@@ -21,6 +21,8 @@
       };
     })
     .controller('sportelliCtrl', function ($scope, $interval, saleService, serviziService, sportelliService) {
+      $scope.ServiziChiamati = [];
+
       $scope.chiama = function () {
         sportelliService.chiamaServizio($scope.servizio);
       };
@@ -34,8 +36,12 @@
       });
 
       $interval(function () {
-        if (!angular.isUndefinedOrNull($scope.salaId)) {
-          sportelliService.restituisciServiziChiamati($scope.salaId);
+        if ($scope.salaId) {
+          sportelliService.restituisciServiziChiamati($scope.salaId).then(function (result) {
+            for (var i = 0; i < result.data.length; i++) {
+              $scope.ServiziChiamati.push(result.data[i]);
+            }
+          });
         }
       }, 2000);
     });

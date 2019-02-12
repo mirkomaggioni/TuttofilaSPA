@@ -77,6 +77,7 @@ https://www.odata.org/getting-started/basic-tutorial/
 
 ## Publisher/Consumer - v0.9
 
+https://www.rabbitmq.com/tutorials/amqp-concepts.html
 https://www.rabbitmq.com/tutorials/tutorial-one-dotnet.html
 https://www.rabbitmq.com/tutorials/tutorial-two-dotnet.html
 https://www.rabbitmq.com/tutorials/tutorial-two-dotnet.html

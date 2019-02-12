@@ -1,9 +1,11 @@
 ﻿using System.Reflection;
 using System.Web.Http;
 using Autofac;
+using Autofac.Integration.SignalR;
 using Autofac.Integration.WebApi;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Owin;
 using TuttofilaSPA.Core;
@@ -20,6 +22,8 @@ namespace TuttofilaSPA.Web
 			var containerBuilder = new ContainerBuilder();
 			containerBuilder.RegisterModule(new ModuloCore());
 			containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+			containerBuilder.RegisterHubs(Assembly.GetExecutingAssembly());
+
 			var container = containerBuilder.Build();
 
 			var config = new HttpConfiguration
@@ -42,6 +46,12 @@ namespace TuttofilaSPA.Web
 			config.Filter().Expand().Select().OrderBy().MaxTop(null).Count();
 
 			app.UseWebApi(config);
+
+			var hubConfig = new HubConfiguration {
+				EnableDetailedErrors = true
+			};
+			hubConfig.Resolver = new AutofacDependencyResolver(container);
+			app.MapSignalR(hubConfig);
 		}
 	}
 }

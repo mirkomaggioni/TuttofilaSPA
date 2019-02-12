@@ -12,9 +12,21 @@ using TuttofilaSPA.Core.Models;
 
 namespace TuttofilaSPA.Core.Services
 {
+	public class MessaggioRicevutoEventArgs : EventArgs
+	{
+		public MessaggioRicevutoEventArgs(Guid salaId)
+		{
+			SalaId = salaId;
+		}
+
+		public Guid SalaId { get; }
+	}
+
 	public class SportelloService
 	{
-		public ConcurrentDictionary<string, List<ChiamataSportello>> ServiziChiamati = new ConcurrentDictionary<string, List<ChiamataSportello>>();
+		public event EventHandler<MessaggioRicevutoEventArgs> MessaggioRicevuto;
+
+		public ConcurrentDictionary<Guid, List<ChiamataSportello>> ServiziChiamati = new ConcurrentDictionary<Guid, List<ChiamataSportello>>();
 
 		private readonly ConnectionFactory ConnectionFactory;
 		private readonly List<AmqpTcpEndpoint> AmqpTcpEndpoints = new List<AmqpTcpEndpoint>()
@@ -28,6 +40,7 @@ namespace TuttofilaSPA.Core.Services
 						HostName = ConfigurationManager.AppSettings["RabbitMQHostname2"]
 					}
 			};
+
 		IConnection Connection;
 		IModel Channel;
 		private readonly string exchange = "tuttofila";
@@ -60,9 +73,10 @@ namespace TuttofilaSPA.Core.Services
 				{
 					Channel.BasicAck(result.DeliveryTag, false);
 					var chiamataSportello = JsonConvert.DeserializeObject<ChiamataSportello>(Encoding.UTF8.GetString(result.Body));
-					var serviziChiamatiSala = ServiziChiamati.GetOrAdd(chiamataSportello.SalaId.ToString(), new List<ChiamataSportello>());
+					var serviziChiamatiSala = ServiziChiamati.GetOrAdd(chiamataSportello.SalaId, new List<ChiamataSportello>());
 					serviziChiamatiSala.Add(chiamataSportello);
-					ServiziChiamati.AddOrUpdate(chiamataSportello.SalaId.ToString(), serviziChiamatiSala, (_, __) => serviziChiamatiSala);
+					ServiziChiamati.AddOrUpdate(chiamataSportello.SalaId, serviziChiamatiSala, (_, __) => serviziChiamatiSala);
+					MessaggioRicevuto?.Invoke(this, new MessaggioRicevutoEventArgs(chiamataSportello.SalaId));
 				}
 				catch (Exception)
 				{
@@ -75,9 +89,10 @@ namespace TuttofilaSPA.Core.Services
 
 		public List<ChiamataSportello> RestituisciServiziChiamati(Guid salaId)
 		{
-			var chiamateSportello = ServiziChiamati.GetOrAdd(salaId.ToString(), new List<ChiamataSportello>());
-			ServiziChiamati.AddOrUpdate(salaId.ToString(), new List<ChiamataSportello>(), (_, __) => new List<ChiamataSportello>());
+			var chiamateSportello = ServiziChiamati.GetOrAdd(salaId, new List<ChiamataSportello>());
+			ServiziChiamati.AddOrUpdate(salaId, new List<ChiamataSportello>(), (_, __) => new List<ChiamataSportello>());
 			return chiamateSportello.OrderByDescending(cs => cs.Data).ToList();
 		}
+
 	}
 }

@@ -21,6 +21,20 @@
       };
     })
     .controller('sportelliCtrl', function ($scope, $interval, saleService, serviziService, sportelliService) {
+
+      var connection = $.hubConnection();
+      var hub = connection.createHubProxy("SportelliHub");
+      hub.on("aggiornaServizi", function (serviziChiamati) {
+        // check sala
+        for (var i = 0; i < serviziChiamati.length; i++) {
+          if (serviziChiamati[i].SalaId === $scope.salaId) {
+            $scope.ServiziChiamati.push(serviziChiamati[i]);
+          }
+        }
+        $scope.$apply();
+      });
+      connection.start();
+
       $scope.ServiziChiamati = [];
 
       $scope.chiama = function () {
@@ -35,6 +49,7 @@
         $scope.Servizi = result.data.value;
       });
 
+      /*
       $interval(function () {
         if ($scope.salaId) {
           sportelliService.restituisciServiziChiamati($scope.salaId).then(function (result) {
@@ -44,5 +59,7 @@
           });
         }
       }, 2000);
+      */
+
     });
 })(window, window.angular);

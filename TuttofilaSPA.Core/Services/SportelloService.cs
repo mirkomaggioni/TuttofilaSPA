@@ -30,9 +30,9 @@ namespace TuttofilaSPA.Core.Services
 			};
 		IConnection Connection;
 		IModel Channel;
-		private readonly string exchange = "tuttofila";
-		private readonly string routingKey = "chiamateTuttofilaSPA";
-		private readonly string queue = "ha.chiamateTuttofilaSPA";
+		private readonly string exchange = "corsoAngular.tuttofila";
+		private readonly string routingKey = "chiamate";
+		private readonly string queue = "corsoAngular.tuttofila.chiamate";
 
 		public SportelloService(ConnectionFactory connectionFactory)
 		{

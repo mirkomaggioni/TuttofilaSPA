@@ -49,6 +49,7 @@ https://bower.io/
 ## Main page - v0.6
 
 https://docs.angularjs.org/tutorial/step_00 <br/>
+https://github.com/angular-ui/ui-router/wiki <br/>
 https://ui-router.github.io/ng1/tutorial/helloworld <br/>
 
 * app.js implementation

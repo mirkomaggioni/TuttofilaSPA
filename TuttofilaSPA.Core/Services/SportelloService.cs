@@ -6,6 +6,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Text;
 using TuttofilaSPA.Core.BusinessObjects;
 using TuttofilaSPA.Core.Models;
@@ -43,9 +44,9 @@ namespace TuttofilaSPA.Core.Services
 
 		IConnection Connection;
 		IModel Channel;
-		private readonly string exchange = "tuttofila";
-		private readonly string routingKey = "chiamateTuttofilaSPA";
-		private readonly string queue = "ha.chiamateTuttofilaSPA";
+		private readonly string exchange = "corsoAngular.tuttofila";
+		private readonly string routingKey = "chiamate";
+		private readonly string queue = $"corsoAngular.{Dns.GetHostName()}.tuttofila.chiamate";
 
 		public SportelloService(ConnectionFactory connectionFactory)
 		{

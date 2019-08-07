@@ -20,8 +20,8 @@ Documentation
 
 ## Owin - v0.3
 
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/use-owin-to-self-host-web-api
-https://autofac.readthedocs.io/en/latest/getting-started/index.html#application-startup
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/use-owin-to-self-host-web-api <br/>
+https://autofac.readthedocs.io/en/latest/getting-started/index.html#application-startup <br/>
 https://docs.microsoft.com/it-it/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint
 
 * Context factory implementation
@@ -48,8 +48,9 @@ https://bower.io/
 
 ## Main page - v0.6
 
-https://docs.angularjs.org/tutorial/step_00
-https://ui-router.github.io/ng1/tutorial/helloworld
+https://docs.angularjs.org/tutorial/step_00 <br/>
+https://github.com/angular-ui/ui-router/wiki <br/>
+https://ui-router.github.io/ng1/tutorial/helloworld <br/>
 
 * app.js implementation
 * mainModule.js implementation
@@ -57,7 +58,7 @@ https://ui-router.github.io/ng1/tutorial/helloworld
 
 ## Sale module - v0.7
 
-https://www.odata.org/getting-started/basic-tutorial/
+https://www.odata.org/getting-started/basic-tutorial/ <br/>
 
 * SaleFactory implementation
 * Sale controllers implementation
@@ -77,9 +78,10 @@ https://www.odata.org/getting-started/basic-tutorial/
 
 ## Publisher/Consumer - v0.9
 
-https://www.rabbitmq.com/tutorials/tutorial-one-dotnet.html
-https://www.rabbitmq.com/tutorials/tutorial-two-dotnet.html
-https://www.rabbitmq.com/tutorials/tutorial-two-dotnet.html
+https://www.rabbitmq.com/tutorials/amqp-concepts.html <br/>
+https://www.rabbitmq.com/tutorials/tutorial-one-dotnet.html <br/>
+https://www.rabbitmq.com/tutorials/tutorial-two-dotnet.html <br/>
+https://www.rabbitmq.com/tutorials/tutorial-two-dotnet.html <br/>
 
 * Publisher implementation
 * Consumer implementation
